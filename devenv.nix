@@ -7,8 +7,11 @@
   languages.nix.enable = true;
 
   scripts = {
-    update.exec = ''
+    nix-update.exec = ''
       nix-channel --update
+    '';
+    switch.exec = ''
+      secretspec run -- home-manager switch
     '';
     upgrade.exec = ''
       nix-channel --update && secretspec run -- home-manager switch
