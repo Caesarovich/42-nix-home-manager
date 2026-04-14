@@ -6,6 +6,12 @@
   home.username = builtins.getEnv "USER";
   home.homeDirectory = "/home/" + config.home.username;
 
+  # Environment variables
+  home.sessionVariables = {
+    STUDENT_USERNAME = builtins.getEnv "STUDENT_USERNAME";
+    STUDENT_EMAIL = builtins.getEnv "STUDENT_EMAIL";
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -27,6 +33,7 @@
     pkgs.vscode
     pkgs.bun
     pkgs.devenv
+    pkgs.terminal-toys
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -56,24 +63,18 @@
     # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
+  # Git
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = config.home.sessionVariables.STUDENT_USERNAME;
+        email = config.home.sessionVariables.STUDENT_EMAIL;
+      };
+      pull = {
+        rebase = true;
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.
