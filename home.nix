@@ -33,6 +33,7 @@
     pkgs.vscode
     pkgs.bun
     pkgs.devenv
+    pkgs.yazi
     pkgs.terminal-toys
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -61,6 +62,14 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  # Aliases for commands. You can also use this to add arguments to existing commands.
+  home.shellAliases = {
+    gs = "git status";
+    gl = "git log --oneline --graph --decorate";
+    gcl = "git clone";
+    y = "yazi";
   };
 
   # Git
