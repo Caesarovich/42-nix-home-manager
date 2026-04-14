@@ -33,7 +33,6 @@
     pkgs.vscode
     pkgs.bun
     pkgs.devenv
-    pkgs.yazi
     pkgs.terminal-toys
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -83,6 +82,22 @@
       pull = {
         rebase = true;
       };
+    };
+  };
+
+  # Yazi
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+    shellWrapperName = "y";
+  };
+
+  # Btop
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "tokyo-storm";
+      theme_background = false;
     };
   };
 
