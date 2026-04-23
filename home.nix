@@ -10,6 +10,7 @@
   home.sessionVariables = {
     STUDENT_USERNAME = builtins.getEnv "STUDENT_USERNAME";
     STUDENT_EMAIL = builtins.getEnv "STUDENT_EMAIL";
+    # MANPAGER = "bat -plman";
   };
 
   # This value determines the Home Manager release that your configuration is
@@ -69,6 +70,7 @@
     gl = "git log --oneline --graph --decorate";
     gcl = "git clone";
     y = "yazi";
+    cat = "bat";
   };
 
   # Git
@@ -85,6 +87,7 @@
     };
   };
 
+
   # Yazi
   programs.yazi = {
     enable = true;
@@ -99,6 +102,19 @@
       color_theme = "tokyo-storm";
       theme_background = false;
     };
+  };
+
+  # EZA
+  programs.eza = {
+    enable = true;
+    enableFishIntegration = true;
+    git = true;
+    icons = "auto";
+  };
+
+  # Bat
+  programs.bat = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.
