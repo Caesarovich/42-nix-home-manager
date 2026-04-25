@@ -43,9 +43,13 @@ ${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-channel --add https:/
 ${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-channel --update
 ${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-shell '<home-manager>' -A install
 
-# Clone this repo
 
+# Remove base home-manager configuration
+rm -rf ${HOME}/.config/home-manager
+
+# Clone this repo
 REPO_URL=https://github.com/Caesarovich/42-nix-home-manager
 
-mkdir -p "${HOME}/.config/home-manager"
+mkdir -p ${HOME}/.config
+
 git clone $REPO_URL "${HOME}/.config/home-manager"
