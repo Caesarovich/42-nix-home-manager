@@ -10,7 +10,23 @@ INSTALL_PATH="${HOME}/nix-user-chroot"
 curl -L "$NIX_CHROOT_DOWNLOAD_URL" -o ${INSTALL_PATH}
 
 
-# Installing the nixos environment
+# Setup bash PATH
+echo "Setting up PATH for bash"
+
+# Check if the line is already in .bash_profile to avoid duplicates
+if ! grep -q 'nix.sh' "${HOME}/.bash_profile"; then
+echo "Adding nix.sh to .bash_profile"
+
+cat >> "${HOME}/.bash_profile" <<'EOF'
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+EOF
+else
+	echo "nix.sh is already in .bash_profile, skipping"
+fi
+
+# Installing the nix environment
 chmod +x ${INSTALL_PATH}
 
 NIX_FOLDER="${HOME}/.nix"
