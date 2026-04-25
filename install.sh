@@ -39,9 +39,9 @@ echo "Installation complete. You can run nix-user-chroot with ${INSTALL_PATH}"
 
 # Enabling home-manager
 echo "Enabling home-manager for the current user"
-${INSTALL_PATH} ${NIX_FOLDER} nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-${INSTALL_PATH} ${NIX_FOLDER} nix-channel --update
-${INSTALL_PATH} ${NIX_FOLDER} nix-shell '<home-manager>' -A install
+${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-channel --update
+${INSTALL_PATH} ${NIX_FOLDER} ${HOME}/.nix-profile/bin/nix-shell '<home-manager>' -A install
 
 # Clone this repo
 
