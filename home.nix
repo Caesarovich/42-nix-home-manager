@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./flavors/minimal
+  ];
+
+
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = builtins.getEnv "USER";
@@ -8,45 +14,13 @@
 
   # Environment variables
   home.sessionVariables = {
-    STUDENT_USERNAME = builtins.getEnv "STUDENT_USERNAME";
-    STUDENT_EMAIL = builtins.getEnv "STUDENT_EMAIL";
-    # MANPAGER = "bat -plman";
+    STUDENT_USERNAME = builtins.getEnv "USER";
+    STUDENT_EMAIL = builtins.getEnv "USER" + "@student.42lyon.fr";
   };
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
-
-  #programs.bash.enable = true;
-  programs.fish.enable = true;
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  nixpkgs.config.allowUnfree = true;
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    pkgs.hello
-    pkgs.vscode
-    pkgs.bun
     pkgs.devenv
     pkgs.terminal-toys
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -69,54 +43,16 @@
     gs = "git status";
     gl = "git log --oneline --graph --decorate";
     gcl = "git clone";
-    y = "yazi";
-    cat = "bat";
   };
 
-  # Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = config.home.sessionVariables.STUDENT_USERNAME;
-        email = config.home.sessionVariables.STUDENT_EMAIL;
-      };
-      pull = {
-        rebase = true;
-      };
-    };
-  };
+    # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
-
-  # Yazi
-  programs.yazi = {
-    enable = true;
-    enableFishIntegration = true;
-    shellWrapperName = "y";
-  };
-
-  # Btop
-  programs.btop = {
-    enable = true;
-    settings = {
-      color_theme = "tokyo-storm";
-      theme_background = false;
-    };
-  };
-
-  # EZA
-  programs.eza = {
-    enable = true;
-    enableFishIntegration = true;
-    git = true;
-    icons = "auto";
-  };
-
-  # Bat
-  programs.bat = {
-    enable = true;
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 }
