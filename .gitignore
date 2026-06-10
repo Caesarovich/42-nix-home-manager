@@ -11,3 +11,6 @@ devenv.local.yaml
 
 # Secretspec
 .env
+
+# Fresh
+.fresh
