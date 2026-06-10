@@ -15,7 +15,7 @@
   xdg.configFile."niri/config.kdl".text = ''
     include "${pkgs.niri.doc}/share/doc/niri/default-config.kdl"
     environment {
-      NIXOS_OZONE_WL "1
+      NIXOS_OZONE_WL "1"
       ELECTRON_OZONE_PLATFORM_HINT "auto"
     }
     xwayland-satellite {
