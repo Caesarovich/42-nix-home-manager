@@ -10,7 +10,7 @@ wget -O- https://raw.githubusercontent.com/Caesarovich/42-nix-home-manager/refs/
 Then enter the nix environment and run the following command to install home-manager configuration:
 ```sh
 ./nix-user-chroot ~/.nix
-home-manager switch
+home-manager switch --flake ~/.config/home-manager#default
 ```
 
 ## Usage
@@ -22,11 +22,21 @@ To enter the nix environment, run the following command:
 
 To update the home-manager configuration, run the following command:
 ```sh
-home-manager switch
+home-manager switch --flake ~/.config/home-manager#default
 ```
 
 To update the packages, run the following command:
 ```sh
 nix-channel --update
-home-manager switch
+home-manager switch --flake ~/.config/home-manager#default
+```
+
+## Occasional cleanup
+
+Nix has a tendency to accumulate old packages and configurations, which can take up a lot of disk space. To clean up old packages and configurations, run the following commands:
+```sh
+nix-env --delete-generations old
+home-manager expire-generations "-1 days"
+nix-collect-garbage -d
+nix-store --optimise
 ```

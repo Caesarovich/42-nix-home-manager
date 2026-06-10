@@ -3,20 +3,28 @@
 {
   imports = [
     ./flavors/minimal
+    ./flavors/niri
   ];
 
 
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = builtins.getEnv "USER";
+  home.username = "ansaccar";
   home.homeDirectory = "/home/" + config.home.username;
 
   # Environment variables
   home.sessionVariables = {
-    STUDENT_USERNAME = builtins.getEnv "USER";
-    STUDENT_EMAIL = builtins.getEnv "USER" + "@student.42lyon.fr";
+    STUDENT_USERNAME = config.home.username;
+    STUDENT_EMAIL = config.home.username + "@student.42lyon.fr";
   };
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  nix.package = pkgs.nix;
 
   home.packages = [
     pkgs.devenv

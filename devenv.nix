@@ -10,10 +10,10 @@
       nix-channel --update
     '';
     switch.exec = ''
-      secretspec run -- home-manager switch
+      secretspec run -- home-manager switch --flake .#default
     '';
     upgrade.exec = ''
-      nix-channel --update && secretspec run -- home-manager switch
+      nix-channel --update && secretspec run -- home-manager switch --flake .#default
     '';
   };
 
